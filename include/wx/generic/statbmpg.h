@@ -72,6 +72,8 @@ private:
     }
 
     void OnPaint(wxPaintEvent& event);
+    void OnSize(wxSizeEvent& event);
+    void OnErase(wxEraseEvent& event);
 
     wxBitmap m_bitmap;
     ScaleMode m_scaleMode;

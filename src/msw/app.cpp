@@ -655,7 +655,8 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
 
     wndclass.lpfnWndProc   = (WNDPROC)wxWndProc;
     wndclass.hInstance     = wxGetInstance();
-    wndclass.hCursor       = ::LoadCursor(NULL, IDC_ARROW);
+    //wndclass.hIcon       = ::LoadIcon(wndclass.hInstance, IDI_APPLICATION);
+    wndclass.hCursor       = ::LoadCursor(wndclass.hInstance, IDC_ARROW);
     wndclass.hbrBackground = (HBRUSH)wxUIntToPtr(bgBrushCol + 1);
     wndclass.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | extraStyles;
 

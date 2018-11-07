@@ -8,7 +8,7 @@
 #############################################################################
 
 # Global build options
-wx_option(wxBUILD_SHARED "Build wx libraries as shared libs" ${BUILD_SHARED_LIBS})
+wx_option(wxBUILD_SHARED "Build wx libraries as shared libs" ${BUILD_SHARED_LIBS} OFF)
 wx_option(wxBUILD_MONOLITHIC "build wxWidgets as single library" OFF)
 wx_option(wxBUILD_SAMPLES "Build only important samples (SOME) or ALL" OFF
     STRINGS SOME ALL OFF)

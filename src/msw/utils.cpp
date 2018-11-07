@@ -1544,6 +1544,8 @@ wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
 
         wndclass.lpfnWndProc   = wndproc;
         wndclass.hInstance     = wxGetInstance();
+        //wndclass.hIcon = ::LoadIcon(wndclass.hInstance, IDI_APPLICATION);
+
         wndclass.lpszClassName = classname;
 
         if ( !::RegisterClass(&wndclass) )

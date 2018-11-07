@@ -138,7 +138,8 @@ function(wx_set_target_properties target_name is_base)
             set_target_properties(${target_name}
                 PROPERTIES
                     RUNTIME_OUTPUT_NAME wx${lib_toolkit}${dll_version}${lib_unicode}${lib_suffix}${dll_suffix}
-                    RUNTIME_OUTPUT_NAME_DEBUG wx${lib_toolkit}${dll_version}${lib_unicode}d${lib_suffix}${dll_suffix})
+										#RUNTIME_OUTPUT_NAME_DEBUG wx${lib_toolkit}${dll_version}${lib_unicode}d${lib_suffix}${dll_suffix})
+                    RUNTIME_OUTPUT_NAME_DEBUG wx${lib_toolkit}${dll_version}${lib_unicode}${lib_suffix}${dll_suffix})
             if(MINGW)
                 # Modify MinGW output to match other build systems
                 set_target_properties(${target_name}
@@ -154,14 +155,14 @@ function(wx_set_target_properties target_name is_base)
         set_target_properties(${target_name}
             PROPERTIES
                 OUTPUT_NAME wx${lib_toolkit}${lib_version}${lib_unicode}${lib_suffix}
-                OUTPUT_NAME_DEBUG wx${lib_toolkit}${lib_version}${lib_unicode}d${lib_suffix}
+                OUTPUT_NAME_DEBUG wx${lib_toolkit}${lib_version}${lib_unicode}${lib_suffix}
                 PREFIX ""
             )
     else()
         set_target_properties(${target_name}
             PROPERTIES
                 OUTPUT_NAME wx_${lib_toolkit}${lib_unicode}${lib_suffix}-${lib_version}
-                OUTPUT_NAME_DEBUG wx_${lib_toolkit}${lib_unicode}d${lib_suffix}-${lib_version}
+                OUTPUT_NAME_DEBUG wx_${lib_toolkit}${lib_unicode}${lib_suffix}-${lib_version}
             )
     endif()
     if(CYGWIN)
@@ -422,7 +423,8 @@ function(wx_set_builtin_target_properties target_name)
     if(WIN32)
         set_target_properties(${target_name}
             PROPERTIES
-                OUTPUT_NAME_DEBUG ${target_name}${lib_unicode}d
+								#OUTPUT_NAME_DEBUG ${target_name}${lib_unicode}d
+                OUTPUT_NAME_DEBUG ${target_name}${lib_unicode}
         )
     endif()
 

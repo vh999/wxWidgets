@@ -24,6 +24,7 @@
     #include "wx/image.h"
     #include "wx/math.h"
 #endif
+#include <wx/dcbuffer.h>
 
 bool wxGenericStaticBitmap::Create(wxWindow *parent, wxWindowID id,
                                    const wxBitmap& bitmap,
@@ -36,17 +37,21 @@ bool wxGenericStaticBitmap::Create(wxWindow *parent, wxWindowID id,
     m_scaleMode = Scale_None;
     SetBitmap(bitmap);
     Bind(wxEVT_PAINT, &wxGenericStaticBitmap::OnPaint, this);
+
+    Bind(wxEVT_SIZE, &wxGenericStaticBitmap::OnSize, this);
+    Bind(wxEVT_ERASE_BACKGROUND, &wxGenericStaticBitmap::OnErase, this);
     return true;
 }
 
 void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
-    if ( !m_bitmap.IsOk() )
-        return;
+    if ( !m_bitmap.IsOk() ) return;
 
+    //wxBufferedPaintDC dc(this);
     wxPaintDC dc(this);
     const wxSize drawSize = GetClientSize();
     const wxSize bmpSize = m_bitmap.GetSize();
+
     wxDouble w = 0;
     wxDouble h = 0;
     switch ( m_scaleMode )
@@ -91,6 +96,20 @@ void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
     dc.DrawBitmap(wxBitmap(img), wxRound(x), wxRound(y), true);
 #endif
 }
+/*
+ * Here we call refresh to tell the panel to draw itself again.
+ * So when the user resizes the image panel the image should be resized too.
+ */
+void wxGenericStaticBitmap::OnSize(wxSizeEvent& event) {
+    Refresh();
+    //skip the event.
+    event.Skip();
+}
+void wxGenericStaticBitmap::OnErase(wxEraseEvent &event)
+{
+
+}
+
 
 // under OSX_cocoa is a define, avoid duplicate info
 #ifndef wxGenericStaticBitmap

@@ -77,7 +77,8 @@ if(MSVC OR MINGW)
 
     if(MSVC)
         # Include generator expression to suppress default Debug/Release pair
-        set(wxPLATFORM_LIB_DIR "$<1:/>${wxCOMPILER_PREFIX}${wxARCH_SUFFIX}_${lib_suffix}")
+			set(wxPLATFORM_LIB_DIR "/${wxCOMPILER_PREFIX}${wxARCH_SUFFIX}_${lib_suffix}")
+        #set(wxPLATFORM_LIB_DIR "$<1:/>${wxCOMPILER_PREFIX}${wxARCH_SUFFIX}_${lib_suffix}")
     else()
         set(wxPLATFORM_LIB_DIR "/${wxCOMPILER_PREFIX}${wxARCH_SUFFIX}_${lib_suffix}")
     endif()
@@ -114,7 +115,7 @@ set(wxSETUP_HEADER_FILE ${wxSETUP_HEADER_PATH}/wx/setup.h)
 if(DEFINED wxSETUP_HEADER_FILE_DEBUG)
     # Append configuration specific suffix to setup header path
     wx_string_append(wxSETUP_HEADER_PATH "$<$<CONFIG:Debug>:d>")
-endif()
+	endif()
 
 if(wxUSE_ON_FATAL_EXCEPTION AND MSVC AND (MSVC_VERSION GREATER 1800) )
     # see include/wx/msw/seh.h for more details
