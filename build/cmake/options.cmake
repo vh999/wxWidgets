@@ -23,6 +23,9 @@ wx_option(wxBUILD_COMPATIBILITY
 set(wxBUILD_CUSTOM_SETUP_HEADER_PATH "" CACHE PATH "Include path containing custom wx/setup.h")
 mark_as_advanced(wxBUILD_CUSTOM_SETUP_HEADER_PATH)
 
+wx_option(wxBUILD_DEBUG_LEVEL "Debug Level" Default STRINGS Default 0 1 2)
+mark_as_advanced(wxBUILD_DEBUG_LEVEL)
+
 if(MSVC)
     wx_option(wxBUILD_USE_STATIC_RUNTIME "Link using the static runtime library" OFF)
     wx_option(wxBUILD_MSVC_MULTIPROC "Enable multi-processor compilation for MSVC")
@@ -68,9 +71,6 @@ wx_add_thirdparty_library(wxUSE_LIBPNG PNG "use libpng (PNG image format)")
 wx_add_thirdparty_library(wxUSE_LIBTIFF TIFF "use libtiff (TIFF file format)")
 
 wx_option(wxUSE_LIBLZMA "use LZMA compression" OFF)
-if(wxUSE_LIBLZMA)
-    find_package(LibLZMA REQUIRED)
-endif()
 set(wxTHIRD_PARTY_LIBRARIES ${wxTHIRD_PARTY_LIBRARIES} wxUSE_LIBLZMA "use liblzma for LZMA compression")
 
 wx_option(wxUSE_OPENGL "use OpenGL (or Mesa)")
@@ -208,8 +208,8 @@ if(APPLE)
     set(wxUSE_GRAPHICS_CONTEXT ON)
 else()
     wx_option(wxUSE_GRAPHICS_CONTEXT "use graphics context 2D drawing API")
-    if (WIN32 AND (NOT MSVC OR MSVC_VERSION LESS 1600))
-        wx_option(wxUSE_GRAPHICS_DIRECT2D "enable Direct2D graphics context" OFF)
+    if(WIN32)
+        wx_option(wxUSE_GRAPHICS_DIRECT2D "enable Direct2D graphics context")
     endif()
 endif()
 
